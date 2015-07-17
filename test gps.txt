@@ -1,0 +1,15 @@
+lockscreen
+enregistrer
+
+
+/data/app/org.qtproject.example.AQtGPS-1/lib/arm
+
+availableSources() ("android")
+sourceName :  "android"
+updateInterval :  0
+
+updateTimeout n'est pas déclenché lors de la perte de fix ... sous android cf QTBUG-36854
+QGeoPositionInfo::VerticalAccuracy QGeoPositionInfo::MagneticVariation and QGeoPositionInfo::VerticalSpeed not avavliable on android.cf QTBUG-46805
+on peut createDefaultSource même lorsque le positionning est désactiver sur android.
+QGeoPositionInfoSource se (re)connect au backend dès qu'il est dispo et redéclanche les update lorsque dispo.
+Donc on peut createDefaultSource  par défaut direct en avertissant error 1 qu'il faut activer le positionnement
