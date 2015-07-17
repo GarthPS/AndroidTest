@@ -24,6 +24,11 @@ void MainWindow::createSource(){
         connect(source, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(error(QGeoPositionInfoSource::Error)));
         connect(source, SIGNAL(updateTimeout()), this, SLOT(missingFix()));
         source->startUpdates();
+        qDebug() << "minimumUpdateInterval" << source->minimumUpdateInterval();
+        qDebug() << "updateInterval" << source->updateInterval();
+        source->setUpdateInterval(1);
+        qDebug() << "minimumUpdateInterval" << source->minimumUpdateInterval();
+        qDebug() << "updateInterval" << source->updateInterval();
     }
 
     satelliteInfo = QGeoSatelliteInfoSource::createDefaultSource(this);
@@ -40,15 +45,12 @@ void MainWindow::createSource(){
 void MainWindow::positionUpdated(const QGeoPositionInfo &info)
 {
         ui->lcdDirection->display(info.attribute(QGeoPositionInfo::Direction));
-        ui->lcdMagVar->display(info.attribute(QGeoPositionInfo::MagneticVariation));
-        ui->lcdVerticalSpeed->display(info.attribute(QGeoPositionInfo::VerticalSpeed)*3.6);
         ui->lcdGNDSpeed->display(info.attribute(QGeoPositionInfo::GroundSpeed)*3.6);
-        ui->lcdVDOP->display(info.attribute(QGeoPositionInfo::VerticalAccuracy));
         ui->lcdHDOP->display(info.attribute(QGeoPositionInfo::HorizontalAccuracy));
         ui->dateTimeEdit->setDateTime(info.timestamp());
         ui->label_coord->setText(info.coordinate().toString(QGeoCoordinate::DegreesMinutesSecondsWithHemisphere));
         qDebug() << "Position updated:" << info.hasAttribute(QGeoPositionInfo::VerticalAccuracy)<< info.hasAttribute(QGeoPositionInfo::MagneticVariation)<< info.hasAttribute(QGeoPositionInfo::VerticalSpeed);
-        //qDebug() << "Position updated:" << QString::number(elaspedTime.elapsed());
+        qDebug() << "Position updated:" << QString::number(elaspedTime.elapsed());
         elaspedTime.restart();
 }
 

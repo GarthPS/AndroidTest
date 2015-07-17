@@ -7,6 +7,7 @@ enregistrer
 availableSources() ("android")
 sourceName :  "android"
 updateInterval :  0
+minimumUpdateInterval 1000
 
 updateTimeout n'est pas déclenché lors de la perte de fix ... sous android cf QTBUG-36854
 QGeoPositionInfo::VerticalAccuracy QGeoPositionInfo::MagneticVariation and QGeoPositionInfo::VerticalSpeed not avavliable on android.cf QTBUG-46805

@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui positioning
+QT       += core gui positioning location
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
